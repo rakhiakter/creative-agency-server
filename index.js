@@ -22,10 +22,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 client.connect((err) => {
   const services = client.db(process.env.DB_NAME).collection("services");
+  const reviews = client.db(process.env.DB_NAME).collection("review");
 console.log("hello");
 
 app.get("/getService", (req, res) => {
   services.find({}).toArray((err, documents) => {
+    res.send(documents);
+  });
+});
+
+app.get("/getReviews", (req, res) => {
+  reviews.find({}).toArray((err, documents) => {
     res.send(documents);
   });
 });
